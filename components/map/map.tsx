@@ -40,18 +40,19 @@ export default function Map({ onCountryClick, isGlobe, onToggleProjection }: Map
     const initializeMap = async () => {
       // Initialize map
       map.current = new mapboxgl.Map({
-        container: mapContainer.current,
+        container: mapContainer.current!,
         style: theme === 'dark' 
-          ? 'mapbox://styles/mapbox/dark-v11'
-          : 'mapbox://styles/mapbox/light-v11',
+          ? 'mapbox://styles/mapbox/standard-satellite'
+          : 'mapbox://styles/mapbox/standard-satellite',
         center: [0, 0],
         zoom: 2,
-        minZoom: 1.5,
+        minZoom: 1,
         maxZoom: 6,
-        projection: 'globe',
-        renderWorldCopies: false,
+        projection: 'mercator',
+        renderWorldCopies: true,
         dragRotate: false,
         pitchWithRotate: false,
+        scrollZoom: true,
         pitch: 0,
         bearing: 0,
       });
@@ -87,7 +88,7 @@ export default function Map({ onCountryClick, isGlobe, onToggleProjection }: Map
 
   useEffect(() => {
     if (map.current) {
-      map.current.setProjection(isGlobe ? 'mercator' : 'globe');
+      map.current.setProjection(isGlobe ? 'globe' : 'mercator');
       map.current.setRenderWorldCopies(!isGlobe);
     }
   }, [isGlobe]);
