@@ -87,7 +87,7 @@ export default function Map({ onCountryClick, isGlobe, onToggleProjection }: Map
 
   useEffect(() => {
     if (map.current) {
-      map.current.setProjection(isGlobe ? 'globe' : 'mercator');
+      map.current.setProjection(isGlobe ? 'mercator' : 'globe');
       map.current.setRenderWorldCopies(!isGlobe);
     }
   }, [isGlobe]);

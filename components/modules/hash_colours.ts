@@ -22,9 +22,9 @@ export const generateColor = (strings: string[]): string => {
     return (baseHash + positionHash) % 1; // Combine base and position
   });
 
-  // Aggregate the numbers with a weighted sum (more weight to later strings)
+  // Aggregate the numbers with a weighted sum (more weight to earlier strings)
   const aggregatedValue =
-    numbers.reduce((sum, num, index) => sum + num * (index + 1), 0) /
+    numbers.reduce((sum, num, index) => sum + num * (numbers.length - index), 0) /
     (numbers.length * (numbers.length + 1) / 2);
 
   // Map aggregated value to RGB using nonlinear scaling
